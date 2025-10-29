@@ -2,17 +2,70 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Alert } from "react-bootstrap";
 import SocialMediaIcon from "../components/SocialMediaIcon";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+} from "../store/slices/authSlice";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, isAuthenticated, error } = useSelector(
+    (state) => state.auth
+  );
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     keepSignedIn: false,
   });
   const [errors, setErrors] = useState({});
-  const handleInputChange = (e) => {};
+  const [successMessage, setSuccessMessage] = useState("");
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+  const validateForm = () => {
+    let newErrors = {};
 
-  const handleSubmit = async (e) => {};
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Enter a valid email";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (
+      !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+        formData.password
+      )
+    ) {
+      newErrors.password =
+        "Password must be at least 8 characters, include 1 capital letter, 1 number & 1 symbol";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      dispatch(loginStart());
+
+      setTimeout(() => {
+      dispatch(loginSuccess(formData));
+      navigate("/home");
+    }, 1500);
+    } else {
+      dispatch(loginFailure("Invalid email or password"));
+    }
+  };
 
   return (
     <div
@@ -25,7 +78,7 @@ const LoginPage = () => {
         backgroundSize: "20px 20px",
       }}
     >
-      <Container fluid className="h-100" style={{ minHeight: '100vh' }}>
+      <Container fluid className="h-100" style={{ minHeight: "100vh" }}>
         <Row className="h-100">
           <Col
             xs={12}
@@ -65,7 +118,7 @@ const LoginPage = () => {
                     onChange={handleInputChange}
                     placeholder="Username or email"
                     isInvalid={!!errors.email}
-                    // disabled={loading}
+                    disabled={loading}
                     style={{
                       border: "1px solid #333",
                       borderRadius: "4px",
@@ -87,7 +140,7 @@ const LoginPage = () => {
                     onChange={handleInputChange}
                     placeholder="Password"
                     isInvalid={!!errors.password}
-                    // disabled={loading}
+                    disabled={loading}
                     style={{
                       border: "1px solid #333",
                       borderRadius: "4px",
@@ -115,10 +168,10 @@ const LoginPage = () => {
                 <Button
                   type="submit"
                   className="w-100 mb-4"
-                  //   disabled={loading}
+                  disabled={loading}
                   style={{ width: "100%" }}
                 >
-                  {/* {loading ? 'Signing In...' : 'Sign In'} */} sign In
+                  {loading ? "Signing In..." : "Sign In"}
                 </Button>
               </Form>
               <div className="text-center">
@@ -135,7 +188,7 @@ const LoginPage = () => {
                     style={{
                       width: "100%",
                       border: "none",
-                      borderTop: "1px solid #ddd",
+                      borderTop: "3px solid #ddd",
                       margin: 0,
                     }}
                   />
@@ -177,9 +230,7 @@ const LoginPage = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            >
-
-            </div>
+            ></div>
           </Col>
         </Row>
       </Container>
