@@ -3,6 +3,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from './screens/LoginPage';
 import HomePage from './screens/HomePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
       <div className="App">
         <Routes>
         <Route path="/" element={<LoginPage />}/>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
       </Routes>
       </div>
       
