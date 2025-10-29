@@ -60,6 +60,7 @@ const LoginPage = () => {
 
       setTimeout(() => {
       dispatch(loginSuccess(formData));
+      localStorage.setItem("user", JSON.stringify(formData));
       navigate("/home");
     }, 1500);
     } else {
@@ -78,8 +79,8 @@ const LoginPage = () => {
         backgroundSize: "20px 20px",
       }}
     >
-      <Container fluid className="h-100" style={{ minHeight: "100vh" }}>
-        <Row className="h-100">
+      <Container fluid className="h-100 " style={{ minHeight: "100vh" }}>
+        <Row className="h-100 ">
           <Col
             xs={12}
             lg={4}
