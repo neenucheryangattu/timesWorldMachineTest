@@ -174,9 +174,9 @@ const handlePrevious = () => {
          <Row className="mb-5">
                   <Col xs={12} md={4} className="order-1 order-md-2 mb-3 mb-md-0">
                     <div 
-                      className="bg-light border d-flex align-items-center justify-content-center sidebar-frame"
+                      className=" border d-flex align-items-center justify-content-center sidebar-frame"
                       style={{
-                        backgroundColor: "#f8f9fa"
+                        backgroundColor: "#d0d1d2ff"
                       }}
                     >
                       <div className="text-muted text-center">                       
@@ -203,7 +203,7 @@ const handlePrevious = () => {
                               className="d-flex align-items-center justify-content-center"
                               style={{
                                 height: "400px",
-                                backgroundColor: "#adb5bd",
+                                backgroundColor: "#d0d1d2ff",
                                 border: "1px solid #dee2e6"
                               }}
                             >
