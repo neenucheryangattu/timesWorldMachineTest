@@ -172,7 +172,6 @@ const handlePrevious = () => {
         </Row>
 
          <Row className="mb-5">
-                  {/* Right Sidebar/Frame - First on mobile, second on desktop */}
                   <Col xs={12} md={4} className="order-1 order-md-2 mb-3 mb-md-0">
                     <div 
                       className="bg-light border d-flex align-items-center justify-content-center sidebar-frame"
@@ -180,16 +179,12 @@ const handlePrevious = () => {
                         backgroundColor: "#f8f9fa"
                       }}
                     >
-                      <div className="text-muted text-center">
-                        <div style={{ fontSize: "48px", marginBottom: "10px" }}>
-                          ◢ ◣ ◤
-                        </div>
+                      <div className="text-muted text-center">                       
                         <div style={{ fontSize: "0.9rem", opacity: 0.7 }}>Frame</div>
                       </div>
                     </div>
                   </Col>
                   
-                  {/* Main Carousel Section - Second on mobile, first on desktop */}
                   <Col xs={12} md={8} className="order-2 order-md-1">
                     <div className="mb-3" style={{ position: "relative" }}>
                       <Carousel 
@@ -218,7 +213,6 @@ const handlePrevious = () => {
                         ))}
                       </Carousel>
                       
-                      {/* Custom Navigation Controls - Fixed position, stays in place */}
                       <div 
                         className="d-flex align-items-center justify-content-center gap-3"
                         style={{

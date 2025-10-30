@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Alert ,Image} from "react-bootstrap";
+import { Container, Row, Col, Form, Alert, Image } from "react-bootstrap";
 import SocialMediaIcon from "../components/SocialMediaIcon";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import {
   loginStart,
   loginSuccess,
 } from "../store/slices/authSlice";
-import loginImage from '../assets/loginImage.svg';
+import loginImage from "../assets/loginImage.svg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -41,14 +41,29 @@ const LoginPage = () => {
     }
 
     if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (
-      !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-        formData.password
-      )
-    ) {
-      newErrors.password =
-        "Password must be at least 8 characters, include 1 capital letter, 1 number & 1 symbol";
+      newErrors.password = ["Password is required"];
+    } else {
+      const password = formData.password;
+      const passwordErrors = [];
+
+      if (password.length < 8) {
+        passwordErrors.push("At least 8 characters long");
+      }
+      if (!/[A-Z]/.test(password)) {
+        passwordErrors.push("At least one uppercase letter");
+      }
+      if (!/\d/.test(password)) {
+        passwordErrors.push("At least one number");
+      }
+      if (!/[@$!%*?&]/.test(password)) {
+        passwordErrors.push(
+          "At least one special character (@, $, !, %, *, ?, &)"
+        );
+      }
+
+      if (passwordErrors.length > 0) {
+        newErrors.password = passwordErrors;
+      }
     }
 
     setErrors(newErrors);
@@ -165,7 +180,19 @@ const LoginPage = () => {
                     }}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.password}
+                    {errors.password && Array.isArray(errors.password) && (
+                      <ul
+                        style={{
+                          color: "red",
+                          marginTop: "5px",
+                          paddingLeft: "20px",
+                        }}
+                      >
+                        {errors.password.map((err, index) => (
+                          <li key={index}>{err}</li>
+                        ))}
+                      </ul>
+                    )}
                   </Form.Control.Feedback>
                 </Form.Group>
 

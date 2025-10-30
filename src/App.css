@@ -1,8 +1,4 @@
 #root {
-  /* max-width: 1280px;
-  margin: 0 auto; */
-  /* padding: 2rem;
-  text-align: center; */
   width: 100%;
   height: 100vh;
 }
@@ -74,7 +70,6 @@
   border-color: #000;
 }
 
-/* Carousel controls (arrows) styling */
 .carousel-control-prev,
 .carousel-control-next {
   width: auto;
@@ -108,9 +103,8 @@
   line-height: 20px;
 }
 
-/* Sidebar/Frame responsive height - landscape on mobile */
 .sidebar-frame {
-  height: 200px; /* Shorter height for mobile (landscape) */
+  height: 200px; 
 }
 
 @media (min-width: 768px) {
@@ -150,7 +144,6 @@
   font-weight: 600;
 }
 
-/* Make input placeholders bolder */
 .login-form-container input::placeholder {
   font-weight: 600;
   color: rgba(0, 0, 0, 0.5);
