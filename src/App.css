@@ -42,3 +42,117 @@
 .read-the-docs {
   color: #888;
 }
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-color: #fff;
+  opacity: 1;
+  margin: 0 4px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background-color: #000;
+  border-color: #000;
+}
+
+/* Carousel controls (arrows) styling */
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto;
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
+  background-image: none;
+  background-color: transparent;
+  filter: none;
+}
+
+.carousel-control-prev-icon::after {
+  content: "←";
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  line-height: 20px;
+}
+
+.carousel-control-next-icon::after {
+  content: "→";
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  line-height: 20px;
+}
+
+/* Sidebar/Frame responsive height - landscape on mobile */
+.sidebar-frame {
+  height: 200px; /* Shorter height for mobile (landscape) */
+}
+
+@media (min-width: 768px) {
+  .sidebar-frame {
+    height: 400px;
+  }
+}
+
+.custom-checkbox {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.custom-checkbox .form-check-input {
+  width: 30px !important;
+  height: 30px !important;
+  border: 2px solid #333 !important;
+  border-radius: 4px !important;
+  cursor: pointer;
+  margin-top: 0 !important;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.custom-checkbox .form-check-input:checked {
+  background-color: #000 !important;
+  border-color: #000 !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e") !important;
+}
+
+.custom-checkbox .form-check-label {
+  margin-left: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* Make input placeholders bolder */
+.login-form-container input::placeholder {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+}
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Alert ,Image} from "react-bootstrap";
 import SocialMediaIcon from "../components/SocialMediaIcon";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import {
   loginStart,
   loginSuccess,
 } from "../store/slices/authSlice";
+import loginImage from '../assets/loginImage.svg';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -59,10 +60,10 @@ const LoginPage = () => {
       dispatch(loginStart());
 
       setTimeout(() => {
-      dispatch(loginSuccess(formData));
-      localStorage.setItem("user", JSON.stringify(formData));
-      navigate("/home");
-    }, 1500);
+        dispatch(loginSuccess(formData));
+        localStorage.setItem("user", JSON.stringify(formData));
+        navigate("/home");
+      }, 1500);
     } else {
       dispatch(loginFailure("Invalid email or password"));
     }
@@ -73,28 +74,29 @@ const LoginPage = () => {
       className="login-page"
       style={{
         minHeight: "100vh",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
         backgroundColor: "#f5f5f5",
-        backgroundImage:
-          "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0)",
-        backgroundSize: "20px 20px",
       }}
     >
-      <Container fluid className="h-100 " style={{ minHeight: "100vh" }}>
-        <Row className="h-100 ">
+      <Container fluid className="h-100 d-flex " style={{ minHeight: "100vh" }}>
+        <Row className="h-100 w-100">
           <Col
             xs={12}
+            md={6}
             lg={4}
-            className="d-flex align-items-center justify-content-center p-5"
+            className="d-flex align-items-center justify-content-center justify-content-md-end p-md-0 pr-md-5"
           >
             <div
               className="login-form-container"
-              style={{ width: "100%", maxWidth: "400px" }}
+              style={{ width: "100%", maxWidth: "400px", padding: "20px" }}
             >
-              <div className="mb-4">
+              <div className="mb-4 text-center text-md-start">
                 <h1
                   style={{
                     fontSize: "2.5rem",
-                    fontWeight: "bold",
+                    fontWeight: "700",
                     color: "#333",
                     margin: 0,
                     marginBottom: "0.5rem",
@@ -102,9 +104,22 @@ const LoginPage = () => {
                 >
                   Sign In
                 </h1>
-                <p style={{ color: "#666", fontSize: "1rem", margin: 0 }}>
+                <p
+                  style={{
+                    color: "#666",
+                    fontSize: "1rem",
+                    margin: 0,
+                    fontWeight: "600",
+                  }}
+                >
                   New user?{" "}
-                  <span style={{ color: "#007bff", cursor: "pointer" }}>
+                  <span
+                    style={{
+                      color: "#007bff",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                    }}
+                  >
                     Create an account
                   </span>
                 </p>
@@ -124,8 +139,7 @@ const LoginPage = () => {
                       border: "1px solid #333",
                       borderRadius: "4px",
                       padding: "12px 16px",
-                      fontSize: "1rem",
-                      backgroundColor: "#fff",
+                      fontWeight: "600",
                     }}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -147,7 +161,7 @@ const LoginPage = () => {
                       borderRadius: "4px",
                       padding: "12px 16px",
                       fontSize: "1rem",
-                      backgroundColor: "#fff",
+                      fontWeight: "600",
                     }}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -162,7 +176,12 @@ const LoginPage = () => {
                     checked={formData.keepSignedIn}
                     onChange={handleInputChange}
                     label="Keep me signed in"
-                    style={{ fontSize: "0.9rem", color: "#666" }}
+                    className="custom-checkbox"
+                    style={{
+                      fontSize: "0.9rem",
+                      color: "#666",
+                      fontWeight: "600",
+                    }}
                   />
                 </Form.Group>
 
@@ -171,6 +190,7 @@ const LoginPage = () => {
                   className="w-100 mb-4"
                   disabled={loading}
                   style={{ width: "100%" }}
+                  fontWeight="700"
                 >
                   {loading ? "Signing In..." : "Sign In"}
                 </Button>
@@ -189,7 +209,7 @@ const LoginPage = () => {
                     style={{
                       width: "100%",
                       border: "none",
-                      borderTop: "3px solid #ddd",
+                      borderTop: "2px solid #000",
                       margin: 0,
                     }}
                   />
@@ -207,31 +227,41 @@ const LoginPage = () => {
                 </div>
 
                 <div className="d-flex justify-content-center gap-3">
-                  <SocialMediaIcon provider="Google" />
-                  <SocialMediaIcon provider="Facebook" />
-                  <SocialMediaIcon provider="LinkedIn" />
-                  <SocialMediaIcon provider="Twitter" />
+                  <SocialMediaIcon provider="google" size={56} />
+                  <SocialMediaIcon provider="facebook" size={56} />
+                  <SocialMediaIcon provider="linkedIn" size={56} />
+                  <SocialMediaIcon provider="twitter" size={56} />
                 </div>
               </div>
             </div>
           </Col>
           <Col
             xs={12}
+            md={6}
             lg={8}
-            className="d-flex align-items-center justify-content-center p-5"
+            className="d-none d-md-flex align-items-center justify-content-start p-md-0 pl-md-5"
           >
             <div
-              className="illustration-container"
+              className="login-image-container"
               style={{
-                position: "relative",
-                backgroundImage: "url('/assets/login-illustration.png')",
                 width: "100%",
                 height: "100%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            ></div>
+            >
+              <Image
+                src={loginImage}
+                alt="Login Illustration"
+                fluid
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  maxHeight: "80vh",
+                }}
+              />
+            </div>
           </Col>
         </Row>
       </Container>

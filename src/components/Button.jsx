@@ -66,7 +66,6 @@ const Button = ({
   };
 
   const buttonStyles = {
-    borderRadius: '4px',
     fontWeight: '500',
     cursor: disabled ? 'not-allowed' : 'pointer',
     opacity: disabled ? 0.6 : 1,

@@ -1,99 +1,31 @@
-import React from 'react';
+import React from "react";
+import { FiLinkedin,FiFacebook,FiTwitter,FiYoutube } from "react-icons/fi";
+import { TbBrandGoogle } from "react-icons/tb";
 
-const SocialMediaIcon = ({ 
-  provider, 
-  onClick, 
-  size = 45, 
-  variant = 'default',
-  className = '',
-  style = {},
-  ...props 
-}) => {
-  const getProviderIcon = () => {
-    switch (provider.toLowerCase()) {
-      case 'google':
-        return 'G';
-      case 'facebook':
-        return 'f';
-      case 'linkedin':
-        return 'in';
-      case 'twitter':
-        return 'T';
-      default:
-        return provider.charAt(0).toUpperCase();
-    }
-  };
-
-  const getVariantStyles = () => {
-    switch (variant) {
-      case 'default':
-        return {
-          backgroundColor: '#666',
-          color: '#fff'
-        };
-      case 'google':
-        return {
-          backgroundColor: '#db4437',
-          color: '#fff'
-        };
-      case 'facebook':
-        return {
-          backgroundColor: '#4267B2',
-          color: '#fff'
-        };
-      case 'linkedin':
-        return {
-          backgroundColor: '#0077b5',
-          color: '#fff'
-        };
-      case 'twitter':
-        return {
-          backgroundColor: '#1DA1F2',
-          color: '#fff'
-        };
-      default:
-        return {
-          backgroundColor: '#666',
-          color: '#fff'
-        };
-    }
+const SocialMediaIcon = ({ provider, size = 45, onClick }) => {
+  const icons = {
+    linkedin: <FiLinkedin  size={size * 1.1} color="#000" />,
+    facebook:<FiFacebook size={size * 1.1} color="#000" />,
+    twitter:<FiTwitter size={size * 1.1} color="#000" />,
+    youtube:<FiYoutube size={size * 1.1} color="#000"/>,
+    google:<TbBrandGoogle size={size * 1.1} color="#000" />
   };
 
   const iconStyles = {
-    width: `${size}px`,
-    height: `${size}px`,
-    borderRadius: '50%',
-    border: 'none',
-    fontSize: size > 40 ? '1.2rem' : '1rem',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'transform 0.2s ease, opacity 0.2s ease',
-    ...getVariantStyles(),
-    ...style
-  };
-
-
-  const handleMouseEnter = (e) => {
-    e.target.style.transform = 'scale(1.05)';
-  };
-
-  const handleMouseLeave = (e) => {
-    e.target.style.transform = 'scale(1)';
+    width: size,
+    height: size,
+    borderRadius: "50%",
+    border: "1px solid #000",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "transparent",
+    cursor: "pointer",
   };
 
   return (
-    <button
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={className}
-      style={iconStyles}
-      aria-label={`Sign in with ${provider}`}
-      {...props}
-    >
-      {getProviderIcon()}
+    <button style={iconStyles} onClick={onClick}>
+      {icons[provider?.toLowerCase()] || "?"}
     </button>
   );
 };
